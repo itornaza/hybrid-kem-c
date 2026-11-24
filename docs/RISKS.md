@@ -1,0 +1,22 @@
+# hybrid-kem-c: Technical Risk Register
+
+Version 0.1 (draft), November 2026. Author: ion-.
+
+Technical risks only. Likelihood (L) and impact (I) are rated L = low, M = medium, H = high. Risks are reviewed at each milestone review (MR). Requirement IDs refer to [SRS.md](SRS.md) (System Requirements Specification).
+
+| ID | Risk | L | I | Mitigation | Owner | Status |
+|---|---|---|---|---|---|---|
+| RK-01 | A new X-Wing draft revision changes the construction or the test vectors | M | M | Pin -11; re-check the Internet Engineering Task Force (IETF) datatracker ([S1](SOURCES.md#s1)) at MR1; move only if the vectors are replaced or the construction changes, and record the move (QUAL-02, FR-10) | project | Open |
+| RK-02 | The -11 Appendix C vectors ([S1](SOURCES.md#s1)) are marked "TODO: replace" and may change | M | L | Use them for -11 as pinned; also run round-trip and cross-implementation tests so verification does not rest on them alone | project | Open |
+| RK-03 | liboqs, OpenSSL or wolfSSL application programming interface (API) drift beyond the pinned versions | M | M | Pin liboqs 0.16.0, OpenSSL 3.5.9 and wolfSSL 5.9.4; rebuild and re-run tests at each milestone review | project | Open |
+| RK-04 | Constant-time limits: OpenSSL documents no constant-time claim for X25519 or SHA-3 (Secure Hash Algorithm 3), and the educational ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) is not constant-time | M | M | Use library primitives only for secret data; record each primitive's documented status with its source; no secret-dependent branches in own code (SEC-08, SEC-07) | project | Open |
+| RK-05 | The draft's binding proof (MAL-BIND-K-PK, MAL-BIND-K-CT) is still pending | L | M | State binding as the draft's claim, not as proven; review when the draft adds the proof (SEC-06) | project | Open |
+| RK-06 | The compiler optimises away secret wiping | M | H | Wipe only with `OQS_MEM_cleanse` or `OPENSSL_cleanse` on hosts, never plain `memset` or Annex K `memset_s`; one reviewed volatile wipe helper only in M6 board code; check every exit path in review (SEC-01, SEC-02, SEC-09) | project | Open |
+| RK-07 | wolfSSL ML-KEM interop mismatch (key encoding, seed order or API naming) | M | L | Use the `wc_MlKemKey_*` API built with `--enable-mlkem`; check (d, z) seed order and FIPS 203 (Federal Information Processing Standard 203, [S2](SOURCES.md#s2)) key formats; test both directions (EDU-07) | project | Open |
+| RK-08 | Optional board: RAM (random-access memory) or timing limits make the port impractical | M | L | Use an RP2350-class board (520 KB static RAM, [S17](SOURCES.md#s17)); no dynamic allocation; measure stack, code size and timings before committing (QUAL-05, PERF-04) | project | Open |
+| RK-09 | The educational ML-KEM is mistaken for production code | L | H | "Educational, not constant-time, not for production" label in its README; list of differences from a hardened implementation; no packaging (SEC-07) | project | Open |
+| RK-10 | OpenSSL rejects an all-zero X25519 output, which the draft does not require, so a small-order ct_X fails where other implementations return a secret | L | L | Document as a deviation; test with 32 zero bytes (IF-04, IF-07) | project | Open |
+| RK-11 | The free cppcheck add-on for MISRA C:2012 (MISRA = originally the Motor Industry Software Reliability Association) covers the rules only partially ([S13](SOURCES.md#s13)): it checks none of the 17 directives, has no check for Rule 1.1, Rule 3.2 or Rule 12.5 (155 of 158 rules have some check), and its mapped checks can miss violations, so a clean report could be over-read as full conformance | M | M | Inspection checklist for the unchecked guidelines and spot checks of key rule groups ([CODING-STANDARD.md](CODING-STANDARD.md) section 3); strict compiler flags for Rule 1.1 (QUAL-01); clean `misra` target (QUAL-07); deviation log reviewed at each milestone review; state the tool and its partial coverage wherever conformance is mentioned (QUAL-06) | project | Open |
+| RK-12 | MISRA rules, such as the essential-type rules in group 10, push the educational ML-KEM-768 towards extra casts and suffixes that make it harder to read alongside FIPS 203 | M | L | Prefer unsigned coefficient arithmetic, which avoids most group 10 findings. Readability for learners comes first: where a rule would still obscure the mapping to FIPS 203, use the scoped deviation DV-02 instead of contorting the code; review readability at MR2 (QUAL-06, SEC-07) | project | Open |
+
+KB = kilobytes.
