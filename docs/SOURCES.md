@@ -169,3 +169,9 @@ https://misra.org.uk/app/uploads/2021/06/MISRA-C-2012-AMD2.pdf
 ISO/IEC JTC1/SC22/WG14 (the C standards committee), N1570, committee draft of ISO/IEC 9899:2011 (C11), 12 Apr 2011: 6.3.1.1 (integer promotions), 6.3.1.3 (signed conversions), 6.5 paragraph 5 (overflow), 6.5.7 (shift operators), 7.24.2.1 (`memcpy`), 7.24.2.2 (`memmove`), K.3.7.4.1 (`memset_s`).
 
 https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf
+
+<a id="s20"></a>
+
+### [S20] Wasson, System Analysis, Design, and Development
+
+Charles S. Wasson, *System Analysis, Design, and Development: Concepts, Principles, and Practices*, Wiley-Interscience, 2006. Chapter 54, "Technical Reviews", including Figure 54.1 (technical review sequencing). Printed book; no link.

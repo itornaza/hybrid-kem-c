@@ -104,14 +104,16 @@ Coverage: 48 of 48 [SRS.md](SRS.md) requirements traced.
 
 ## 5. Milestone reviews, MR0 to MR6 (MR6 only if M6 goes ahead)
 
+Milestone reviews (MR) are technical reviews ([S20](SOURCES.md#s20), chapter 54), tailored to the size of this project and held at the end of each milestone. Each review also acts as a small requirements traceability audit (RTA). The last column names the nearest review in the source's technical review sequence (its Figure 54.1).
+
 Each review checks the milestone's requirements against evidence, updates the Status column above and the risk register in [RISKS.md](RISKS.md), and re-records the version pins.
 
-| Review | Entry criteria | Exit criteria |
-|---|---|---|
-| MR0 | M0 program builds; [SRS.md](SRS.md) and [ICD.md](ICD.md) drafts in the repo | FR-01 to FR-04, SEC-01, QUAL-01 to QUAL-03 verified; ASan/UBSan clean |
-| MR1 | X-Wing library and tests complete | All M1 requirements verified, including IF-08, SEC-09 and QUAL-06 to QUAL-08 for the library; Appendix C vectors pass; draft revision re-checked on the datatracker ([S1](SOURCES.md#s1)) |
-| MR2 | Educational ML-KEM-768 complete | All EDU requirements, SEC-07, PERF-03, and QUAL-06, QUAL-07 and SEC-09 (educational code) verified; three-way interop passes |
-| MR3 | Tutorial lab written | Every lab command re-run from a clean checkout matches the shown output |
-| MR4 | Demonstration program ready | QUAL-04 demonstrated from a clean checkout |
-| MR5 | Upstream pull request opened | Review comments answered; outcome recorded |
-| MR6 | (Optional) Board build runs, after MR2 | FR-11, IF-06, QUAL-05, PERF-04, and QUAL-06 and SEC-09 (board code, including the volatile wipe helper) verified; board measurements in [README.md](../README.md) |
+| Review | Entry criteria | Exit criteria | Nearest Wasson review |
+|---|---|---|---|
+| MR0 | M0 program builds; [SRS.md](SRS.md) and [ICD.md](ICD.md) drafts in the repo | FR-01 to FR-04, SEC-01, QUAL-01 to QUAL-03 verified; ASan/UBSan clean | SRR and SDR (System Requirements and System Design Reviews) |
+| MR1 | X-Wing library and tests complete | All M1 requirements verified, including IF-08, SEC-09 and QUAL-06 to QUAL-08 for the library; Appendix C vectors pass; draft revision re-checked on the datatracker ([S1](SOURCES.md#s1)) | TRR and SVR (Test Readiness and System Verification Reviews), X-Wing library |
+| MR2 | Educational ML-KEM-768 complete | All EDU requirements, SEC-07, PERF-03, and QUAL-06, QUAL-07 and SEC-09 (educational code) verified; three-way interop passes | TRR and SVR, educational ML-KEM-768 |
+| MR3 | Tutorial lab written | Every lab command re-run from a clean checkout matches the shown output | FCA (Functional Configuration Audit) |
+| MR4 | Demonstration program ready | QUAL-04 demonstrated from a clean checkout | PCA (Physical Configuration Audit) |
+| MR5 | Upstream pull request opened | Review comments answered; outcome recorded | RTSR (Ready-to-Ship Review) |
+| MR6 | (Optional) Board build runs, after MR2 | FR-11, IF-06, QUAL-05, PERF-04, and QUAL-06 and SEC-09 (board code, including the volatile wipe helper) verified; board measurements in [README.md](../README.md) | TRR and SVR, board build |
