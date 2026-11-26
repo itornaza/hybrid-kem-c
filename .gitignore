@@ -18,6 +18,9 @@ build/
 *.swp
 *~
 
+# cmake
+CMakeUserPresets.json
+
 # Tooling caches and generated files
 compile_commands.json
 .cache/
