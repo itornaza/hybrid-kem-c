@@ -59,6 +59,25 @@ The open-source cppcheck MISRA add-on covers the rules only partially ([S13](SOU
 | Rules 7.3, 12.1 and 12.2 | Always fixed, never deviated |
 | Masks | `0U - x` masks are compliant as written; no deviation needed |
 | Size constants | `HKEM_*` size constants carry a `U` suffix ([ICD.md](ICD.md) section 2) |
+### 3.3 File header
+
+Every `.c` and `.h` file starts with this block comment. A blank comment line follows the file name. `Verifies:` appears in test files only and lists requirement IDs from [VERIFICATION.md](VERIFICATION.md); mark partial coverage as `(partial: ...)`. The copyright holder matches [LICENSE](../LICENSE).
+
+```c
+/*
+ * <file name>
+ *
+ * <One to three lines: what the file does and why.>
+ * <Tests: what is checked and the exit status (0 pass, 1 fail).>
+ *
+ * Verifies: <requirement IDs>
+ *
+ * Copyright (c) 2026 ion-
+ * SPDX-License-Identifier: MIT
+ */
+```
+
+The SPDX line (SPDX = Software Package Data Exchange) keeps the licence with a file that is copied out of the repository and can be read by tools.
 
 ## 4. Deviations
 
