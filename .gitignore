@@ -1,3 +1,6 @@
+# Private references folder
+references/
+
 # MISRA C:2012 rule headlines (CC BY-NC-ND 4.0): download locally, never commit
 misra_c_2012__headlines_for_cppcheck*.txt
 
