@@ -30,7 +30,7 @@ int main(void)
     /* Initialize OQS KEM */
     kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_768);
     if (kem == NULL) {
-        fprintf(stderr, "OQS_KEM_new failed\n");
+        (void)fprintf(stderr, "OQS_KEM_new failed\n");
         goto cleanup;
     }
 
@@ -39,52 +39,52 @@ int main(void)
         (kem->length_secret_key    != 2400U) ||
         (kem->length_ciphertext    != 1088U) ||
         (kem->length_shared_secret !=   32U)) {
-        fprintf(stderr, "unexpected ML-KEM-768 sizes\n");
+        (void)fprintf(stderr, "unexpected ML-KEM-768 sizes\n");
         goto cleanup;
     }
 
     /* Memory allocations */
     pk = malloc(kem->length_public_key);
     if (pk == NULL) {
-        fprintf(stderr, "length_public_key malloc failed\n");
+        (void)fprintf(stderr, "length_public_key malloc failed\n");
         goto cleanup;
     }
     sk = malloc(kem->length_secret_key);
     if (sk == NULL) {
-        fprintf(stderr, "length_secret_key malloc failed\n");
+        (void)fprintf(stderr, "length_secret_key malloc failed\n");
         goto cleanup;
     }
     ct = malloc(kem->length_ciphertext);
     if (ct == NULL) {
-        fprintf(stderr, "length_ciphertext malloc failed\n");
+        (void)fprintf(stderr, "length_ciphertext malloc failed\n");
         goto cleanup;
     }
     ss_enc = malloc(kem->length_shared_secret);
     if (ss_enc == NULL) {
-        fprintf(stderr, "length_shared_secret malloc failed\n");
+        (void)fprintf(stderr, "length_shared_secret malloc failed\n");
         goto cleanup;
     }
     ss_dec = malloc(kem->length_shared_secret);
     if (ss_dec == NULL) {
-        fprintf(stderr, "length_shared_secret malloc failed\n");
+        (void)fprintf(stderr, "length_shared_secret malloc failed\n");
         goto cleanup;
     }
 
     /* KEM round trip */
     if (OQS_KEM_keypair(kem, pk, sk) != OQS_SUCCESS) {
-        fprintf(stderr, "keypair failed\n");
+        (void)fprintf(stderr, "keypair failed\n");
         goto cleanup;
     }
     if (OQS_KEM_encaps(kem, ct, ss_enc, pk) != OQS_SUCCESS) {
-        fprintf(stderr, "encaps failed\n");
+        (void)fprintf(stderr, "encaps failed\n");
         goto cleanup;
     }
     if (OQS_KEM_decaps(kem, ss_dec, ct, sk) != OQS_SUCCESS) {
-        fprintf(stderr, "decaps failed\n");
+        (void)fprintf(stderr, "decaps failed\n");
         goto cleanup;
     }
     if (OQS_MEM_secure_bcmp(ss_enc, ss_dec, kem->length_shared_secret) != 0) {
-        fprintf(stderr, "shared secrets differ\n");
+        (void)fprintf(stderr, "shared secrets differ\n");
         goto cleanup;
     }
 
