@@ -23,6 +23,7 @@ build/
 
 # cmake
 CMakeUserPresets.json
+compile_commands.json
 
 # Tooling caches and generated files
 compile_commands.json
